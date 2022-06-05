@@ -1,0 +1,40 @@
+bool isPalindrome(ListNode* head) {
+      
+            ListNode *ptr = head;
+        int size=0;
+        while(ptr!=nullptr)
+            size++, ptr = ptr->next;
+        
+        int  firstHalf = (size+1)/2 ;
+        ListNode *temp;
+        ptr = head;
+        while(firstHalf--)
+        {
+            temp = ptr , ptr = ptr->next;
+        }
+        
+        //Reverse List
+        ListNode *prev = nullptr,  *curr = ptr,  *nxt;
+        while(curr!=nullptr)
+        {
+            nxt = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = nxt;
+        }
+        //link the last node of list to the end node of of first half linked list 
+        temp->next = prev;
+            
+        ListNode *ag = head, *pch = prev;
+        
+        while(pch!=nullptr)
+        {
+            if((ag->val) != (pch->val))
+                return false;
+            ag = ag->next;
+            pch = pch->next;
+        }
+        return true;
+
+        
+    }
