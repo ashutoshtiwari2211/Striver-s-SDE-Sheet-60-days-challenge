@@ -1,0 +1,25 @@
+int par[200005];
+void rec(TreeNode *root, int pr)
+{
+    if(root==NULL)
+    return;
+   par[root->val] = pr;
+   rec(root->left, root->val);
+   rec(root->right, root->val);
+}
+vector<int> Solution::solve(TreeNode* A, int B) {
+   
+   TreeNode *ptr = A;
+   memset(par, -1, sizeof(par));
+   rec(A, -1);
+   vector<int> ans;
+   while(B!=-1)
+   {
+       ans.push_back(B);
+       B = par[B];
+   }
+   reverse(ans.begin(), ans.end());
+
+   return ans;
+
+}
